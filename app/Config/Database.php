@@ -58,23 +58,24 @@ class Database extends Config
     {
         parent::__construct();
 
-        // Support clean environment variables without dots (Vercel standard)
-        if ($host = getenv('DB_HOST')) {
+        // Support both clean names (DB_HOST) and underscore names (database_default_hostname)
+        if ($host = getenv('DB_HOST') ?: getenv('database_default_hostname') ?: getenv('DATABASE_DEFAULT_HOSTNAME')) {
             $this->default['hostname'] = $host;
         }
-        if ($user = getenv('DB_USER')) {
+        if ($user = getenv('DB_USER') ?: getenv('database_default_username') ?: getenv('DATABASE_DEFAULT_USERNAME')) {
             $this->default['username'] = $user;
         }
-        if ($pass = getenv('DB_PASSWORD')) {
+        if ($pass = getenv('DB_PASSWORD') ?: getenv('database_default_password') ?: getenv('DATABASE_DEFAULT_PASSWORD')) {
             $this->default['password'] = $pass;
         }
-        if ($db = getenv('DB_NAME')) {
+        if ($db = getenv('DB_NAME') ?: getenv('database_default_database') ?: getenv('DATABASE_DEFAULT_DATABASE')) {
             $this->default['database'] = $db;
         }
-        if ($port = getenv('DB_PORT')) {
+        if ($port = getenv('DB_PORT') ?: getenv('database_default_port') ?: getenv('DATABASE_DEFAULT_PORT')) {
             $this->default['port'] = (int) $port;
         }
-        if (getenv('DB_SSL') === 'true' || getenv('DB_SSL') === '1') {
+        $ssl = getenv('DB_SSL') ?: getenv('database_default_encrypt') ?: getenv('DATABASE_DEFAULT_ENCRYPT');
+        if ($ssl === 'true' || $ssl === '1') {
             $this->default['encrypt'] = [
                 'ssl_verify' => true,
                 'ssl_ca'     => file_exists(__DIR__ . '/../../database/cacert.pem') ? realpath(__DIR__ . '/../../database/cacert.pem') : (file_exists('/etc/ssl/certs/ca-certificates.crt') ? '/etc/ssl/certs/ca-certificates.crt' : null),
