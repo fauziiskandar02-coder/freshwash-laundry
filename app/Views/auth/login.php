@@ -179,10 +179,13 @@
                     <div class="auth-avatar-mascot mb-3">
                         🧼
                     </div>
-                    <div class="d-flex justify-content-center mb-2">
+                    <div class="d-flex justify-content-center mb-2" style="gap: 8px;">
                         <span class="laundry-badge-pill laundry-badge-clean font-weight-bold shadow-sm">
                             🫧 100% Bersih, Wangi &amp; Rapi
                         </span>
+                        <a href="<?= base_url('info') ?>" class="laundry-badge-pill font-weight-bold shadow-sm text-decoration-none" style="background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd;">
+                            <i class="fas fa-users mr-1"></i> Info Kelompok 5
+                        </a>
                     </div>
                     <h2 class="font-weight-bold text-dark mb-1" style="font-family: 'Nunito', sans-serif; font-size: 2rem;">
                         FreshWash <span class="text-primary">Laundry</span>
@@ -193,11 +196,19 @@
 
                 <!-- Login Glass Card -->
                 <div class="card auth-card-glass p-4 p-md-5">
-                    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
                         <h4 class="font-weight-bold text-dark mb-0" style="font-size: 1.25rem;">
                             <i class="fas fa-soap text-primary mr-1"></i> Masuk Akun Kasir
                         </h4>
                         <span class="badge badge-light border text-primary font-weight-bold px-2 py-1" style="border-radius: 8px;">PORTAL</span>
+                    </div>
+
+                    <!-- Auto-Fill Quick Notice -->
+                    <div class="p-2 mb-3 d-flex align-items-center shadow-sm" style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; color: #0369a1; font-size: 0.8rem;">
+                        <i class="fas fa-bolt text-warning mr-2" style="font-size: 1rem;"></i>
+                        <div>
+                            <b>Akun Siap Pakai:</b> Email &amp; Password otomatis terisi. Tinggal klik tombol <b>Masuk ke Toko Laundry</b>!
+                        </div>
                     </div>
 
                     <?php if (session()->getFlashdata('error')): ?>
@@ -221,7 +232,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                 </div>
-                                <input type="email" name="email" class="form-control" placeholder="nama@umkm.id" value="<?= old('email', 'admin@umkm.id') ?>" required autofocus>
+                                <input type="email" name="email" id="loginEmail" class="form-control" placeholder="nama@umkm.id" value="admin@umkm.id" required autofocus>
                             </div>
                         </div>
 
@@ -231,18 +242,25 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                 </div>
-                                <input type="password" name="password" class="form-control" placeholder="••••••••" value="admin123" required>
+                                <input type="password" name="password" id="loginPassword" class="form-control" placeholder="••••••••" value="admin123" required autocomplete="current-password">
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-login-submit btn-block">
+                        <button type="submit" class="btn btn-login-submit btn-block shadow-sm">
                             <i class="fas fa-sign-in-alt mr-2"></i> Masuk ke Toko Laundry
                         </button>
                     </form>
 
+                    <!-- Info Kelompok 5 Link Button -->
+                    <div class="mt-3">
+                        <a href="<?= base_url('info') ?>" class="btn btn-outline-info btn-block font-weight-bold py-2" style="border-radius: 14px; font-size: 0.85rem; border-color: #7dd3fc; color: #0284c7;">
+                            <i class="fas fa-users-cog mr-1"></i> Lihat Info Anggota Kelompok 5 &bull; Kelas C/P2
+                        </a>
+                    </div>
+
                     <!-- Quick Demo Credentials -->
-                    <div class="mt-4 pt-3 border-top text-center">
-                        <span class="small text-muted font-weight-bold d-block mb-2">⚡ Masuk Cepat Akun Demo:</span>
+                    <div class="mt-3 pt-3 border-top text-center">
+                        <span class="small text-muted font-weight-bold d-block mb-2">⚡ Pilihan Cepat Role Kasir:</span>
                         <div class="d-flex justify-content-center" style="gap: 8px;">
                             <button type="button" class="btn btn-sm btn-outline-primary font-weight-bold px-3 py-2" style="border-radius: 12px;" onclick="fillLogin('admin@umkm.id', 'admin123')">
                                 <i class="fas fa-user-shield mr-1"></i> Owner (Admin)
@@ -277,6 +295,17 @@
             document.querySelector('input[name="email"]').value = email;
             document.querySelector('input[name="password"]').value = pass;
         }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            var emailInput = document.getElementById('loginEmail');
+            var passInput = document.getElementById('loginPassword');
+            if (emailInput && (!emailInput.value || emailInput.value.trim() === '')) {
+                emailInput.value = 'admin@umkm.id';
+            }
+            if (passInput && (!passInput.value || passInput.value.trim() === '')) {
+                passInput.value = 'admin123';
+            }
+        });
     </script>
 </body>
 </html>

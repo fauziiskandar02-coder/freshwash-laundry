@@ -10,6 +10,11 @@
         </div>
     </form>
     <ul class="navbar-nav navbar-right align-items-center" style="gap: 12px;">
+        <li>
+            <a href="<?= base_url('info') ?>" class="btn btn-sm btn-outline-primary font-weight-bold shadow-sm px-3" style="border-radius: 12px; background: #ffffff;">
+                <i class="fas fa-users text-primary mr-1"></i> <span class="d-none d-md-inline">Info Kelompok 5</span>
+            </a>
+        </li>
         <li class="d-none d-sm-block">
             <div class="laundry-badge-pill laundry-badge-clean font-weight-bold">
                 <i class="fas fa-check-circle mr-1"></i>

@@ -13,9 +13,15 @@ $routes->get('register', 'AuthController::register');
 $routes->post('register', 'AuthController::processRegister');
 $routes->get('logout', 'AuthController::logout');
 
-// Redirect root to dashboard
+// Public Info & Tim Kelompok 5
+$routes->get('info', 'InfoController::index');
+
+// Redirect root to dashboard if logged in, or directly to login
 $routes->get('/', function() {
-    return redirect()->to(base_url('dashboard'));
+    if (session()->get('is_logged_in')) {
+        return redirect()->to(base_url('dashboard'));
+    }
+    return redirect()->to(base_url('login'));
 });
 
 // Protected Routes (Harus Login)

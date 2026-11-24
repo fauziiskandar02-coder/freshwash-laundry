@@ -92,6 +92,13 @@ $userRole = session()->get('user_role') ?? 'kasir';
                 </a>
             </li>
             <?php endif; ?>
+
+            <li class="menu-header">Informasi Tim &amp; Proyek</li>
+            <li class="<?= ($seg1 === 'info') ? 'active' : '' ?>">
+                <a class="nav-link" href="<?= base_url('info') ?>">
+                    <i class="fas fa-users text-primary"></i> <span>Info Kelompok 5</span>
+                </a>
+            </li>
         </ul>
 
         <!-- Bottom Laundry Badge -->
