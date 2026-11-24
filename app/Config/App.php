@@ -18,6 +18,19 @@ class App extends BaseConfig
      */
     public string $baseURL = 'http://localhost:8080/';
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Dynamically detect Vercel / Cloud URL
+        if (isset($_SERVER['HTTP_HOST'])) {
+            $proto = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+                ? 'https' : 'http';
+            $this->baseURL = $proto . '://' . $_SERVER['HTTP_HOST'] . '/';
+        }
+    }
+
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
      * If you want to accept multiple Hostnames, set this.
@@ -40,7 +53,7 @@ class App extends BaseConfig
      * something else. If you have configured your web server to remove this file
      * from your site URIs, set this variable to an empty string.
      */
-    public string $indexPage = 'index.php';
+    public string $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------

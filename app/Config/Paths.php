@@ -57,8 +57,14 @@ class Paths
 
     public function __construct()
     {
-        // Support Vercel Serverless environment where root is read-only
-        if (getenv('VERCEL') || getenv('AWS_LAMBDA_FUNCTION_NAME')) {
+        $isServerless = (PHP_OS !== 'WINNT' && is_dir('/tmp'))
+            || !is_writable(__DIR__ . '/../../writable')
+            || getenv('VERCEL')
+            || isset($_SERVER['VERCEL'])
+            || isset($_ENV['VERCEL'])
+            || getenv('AWS_LAMBDA_FUNCTION_NAME');
+
+        if ($isServerless) {
             $tmp = '/tmp/writable';
             if (!is_dir($tmp)) {
                 @mkdir($tmp, 0777, true);
@@ -66,6 +72,7 @@ class Paths
                 @mkdir($tmp . '/logs', 0777, true);
                 @mkdir($tmp . '/session', 0777, true);
                 @mkdir($tmp . '/debugbar', 0777, true);
+                @mkdir($tmp . '/uploads', 0777, true);
             }
             $this->writableDirectory = $tmp;
         }

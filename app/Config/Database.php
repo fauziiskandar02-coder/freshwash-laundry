@@ -58,27 +58,53 @@ class Database extends Config
     {
         parent::__construct();
 
+        $getEnv = function (...$keys) {
+            foreach ($keys as $k) {
+                if ($v = getenv($k)) return $v;
+                if (isset($_SERVER[$k]) && $_SERVER[$k] !== '') return $_SERVER[$k];
+                if (isset($_ENV[$k]) && $_ENV[$k] !== '') return $_ENV[$k];
+            }
+            return null;
+        };
+
         // Support both clean names (DB_HOST) and underscore names (database_default_hostname)
-        if ($host = getenv('DB_HOST') ?: getenv('database_default_hostname') ?: getenv('DATABASE_DEFAULT_HOSTNAME')) {
+        if ($host = $getEnv('DB_HOST', 'database_default_hostname', 'DATABASE_DEFAULT_HOSTNAME')) {
             $this->default['hostname'] = $host;
         }
-        if ($user = getenv('DB_USER') ?: getenv('database_default_username') ?: getenv('DATABASE_DEFAULT_USERNAME')) {
+        if ($user = $getEnv('DB_USER', 'database_default_username', 'DATABASE_DEFAULT_USERNAME')) {
             $this->default['username'] = $user;
         }
-        if ($pass = getenv('DB_PASSWORD') ?: getenv('database_default_password') ?: getenv('DATABASE_DEFAULT_PASSWORD')) {
+        if ($pass = $getEnv('DB_PASSWORD', 'database_default_password', 'DATABASE_DEFAULT_PASSWORD')) {
             $this->default['password'] = $pass;
         }
-        if ($db = getenv('DB_NAME') ?: getenv('database_default_database') ?: getenv('DATABASE_DEFAULT_DATABASE')) {
+        if ($db = $getEnv('DB_NAME', 'database_default_database', 'DATABASE_DEFAULT_DATABASE')) {
             $this->default['database'] = $db;
         }
-        if ($port = getenv('DB_PORT') ?: getenv('database_default_port') ?: getenv('DATABASE_DEFAULT_PORT')) {
+        if ($port = $getEnv('DB_PORT', 'database_default_port', 'DATABASE_DEFAULT_PORT')) {
             $this->default['port'] = (int) $port;
         }
-        $ssl = getenv('DB_SSL') ?: getenv('database_default_encrypt') ?: getenv('DATABASE_DEFAULT_ENCRYPT');
-        if ($ssl === 'true' || $ssl === '1') {
+
+        $ssl = $getEnv('DB_SSL', 'database_default_encrypt', 'DATABASE_DEFAULT_ENCRYPT');
+        $isTiDB = (strpos($this->default['hostname'], 'tidbcloud.com') !== false);
+
+        if ($isTiDB || $ssl === 'true' || $ssl === '1') {
+            $caPath = null;
+            $candidates = [
+                __DIR__ . '/../../database/cacert.pem',
+                '/var/task/database/cacert.pem',
+                '/etc/ssl/certs/ca-certificates.crt',
+                '/etc/pki/tls/certs/ca-bundle.crt'
+            ];
+            foreach ($candidates as $cand) {
+                if (file_exists($cand)) {
+                    $caPath = realpath($cand) ?: $cand;
+                    break;
+                }
+            }
+
             $this->default['encrypt'] = [
-                'ssl_verify' => true,
-                'ssl_ca'     => file_exists(__DIR__ . '/../../database/cacert.pem') ? realpath(__DIR__ . '/../../database/cacert.pem') : (file_exists('/etc/ssl/certs/ca-certificates.crt') ? '/etc/ssl/certs/ca-certificates.crt' : null),
+                'ssl_verify' => ($caPath !== null),
+                'ssl_ca'     => $caPath,
             ];
         }
     }
