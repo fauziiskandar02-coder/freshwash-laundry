@@ -9,6 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 // Auth Routes (Public)
 $routes->get('login', 'AuthController::login');
 $routes->post('login', 'AuthController::processLogin');
+$routes->get('quick-login', 'AuthController::quickLogin');
 $routes->get('register', 'AuthController::register');
 $routes->post('register', 'AuthController::processRegister');
 $routes->get('logout', 'AuthController::logout');

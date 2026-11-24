@@ -1,87 +1,88 @@
-<!-- Header Info Banner -->
-<div class="card border-0 mb-4 shadow-sm" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-radius: 20px; color: #ffffff; overflow: hidden; position: relative;">
-    <div style="position: absolute; right: -20px; bottom: -30px; font-size: 9rem; opacity: 0.12; pointer-events: none;">
+<!-- Header Info Banner (Custom Non-Card Container to Avoid Stisla Override) -->
+<div class="mb-4 shadow p-4 p-md-5" style="background: linear-gradient(135deg, #0369a1 0%, #0284c7 60%, #0ea5e9 100%) !important; border-radius: 22px; color: #ffffff !important; overflow: hidden; position: relative; border: 2px solid #bae6fd;">
+    <div style="position: absolute; right: -10px; bottom: -20px; font-size: 8.5rem; opacity: 0.18; pointer-events: none;">
         🧺
     </div>
-    <div class="card-body p-4 p-md-5 position-relative" style="z-index: 2;">
+    <div class="position-relative" style="z-index: 2;">
         <div class="d-flex flex-wrap align-items-center mb-3" style="gap: 10px;">
-            <span class="badge badge-light text-primary font-weight-bold px-3 py-2 shadow-sm" style="border-radius: 12px; font-size: 0.82rem;">
+            <span class="badge font-weight-bold px-3 py-2 shadow-sm" style="border-radius: 12px; font-size: 0.84rem; background: #ffffff !important; color: #0284c7 !important;">
                 <i class="fas fa-graduation-cap mr-1"></i> TUGAS BESAR KELOMPOK 5 &bull; KELAS C/P2
             </span>
-            <span class="badge badge-warning text-dark font-weight-bold px-3 py-2 shadow-sm" style="border-radius: 12px; font-size: 0.82rem;">
+            <span class="badge font-weight-bold px-3 py-2 shadow-sm" style="border-radius: 12px; font-size: 0.84rem; background: #fef08a !important; color: #854d0e !important;">
                 <i class="fas fa-check-double mr-1"></i> KOMAK TI &amp; AABW
             </span>
-            <span class="badge badge-info text-white font-weight-bold px-3 py-2 shadow-sm" style="border-radius: 12px; font-size: 0.82rem; background: rgba(255,255,255,0.2);">
+            <span class="badge font-weight-bold px-3 py-2 shadow-sm" style="border-radius: 12px; font-size: 0.84rem; background: rgba(255,255,255,0.25) !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.4);">
                 <i class="fas fa-university mr-1"></i> Sekolah Vokasi &mdash; IPB University
             </span>
         </div>
-        <h1 class="font-weight-bold mb-2 text-white" style="font-size: 1.85rem; font-family: 'Nunito', sans-serif;">
+        <h1 class="font-weight-bold mb-2" style="font-size: 1.85rem; font-family: 'Nunito', sans-serif; color: #ffffff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.15);">
             Profil Kelompok 5 &amp; Informasi Sistem FreshWash Laundry
         </h1>
-        <p class="mb-0 text-white-50" style="font-size: 0.98rem; max-width: 820px; line-height: 1.6;">
+        <p class="mb-0" style="font-size: 0.98rem; max-width: 860px; line-height: 1.6; color: #f0f9ff !important; font-weight: 500;">
             Aplikasi Sistem Informasi Akuntansi (SIA) Siklus Pendapatan untuk UMKM Usaha Jasa Laundry &amp; Dry Cleaning. Dilengkapi otomatisasi penjurnalan double-entry kasir POS, cetak struk nota thermal, dan monitoring piutang member berbasis web cloud.
         </p>
     </div>
 </div>
 
 <!-- ========================================================
-     DAFTAR ANGGOTA KELOMPOK 5 (BERDERET DENGAN FOTO AVATAR)
+     DAFTAR ANGGOTA KELOMPOK 5 (BERDERET & RATA TENGAH DENGAN FOTO AVATAR)
      ======================================================== -->
 <div class="d-flex justify-content-between align-items-center mb-3">
     <div>
         <h3 class="font-weight-bold text-dark mb-0" style="font-size: 1.35rem;">
             <i class="fas fa-users text-primary mr-2"></i> Susunan Anggota Tim Kelompok 5
         </h3>
-        <p class="text-muted small mb-0">Disusun berderet rapi beserta NIM, peran teknis, dan avatar karakter khusus tim:</p>
+        <p class="text-muted small mb-0">Disusun berderet rapi di tengah beserta NIM, peran teknis, dan avatar karakter khusus tim:</p>
     </div>
     <span class="badge badge-pill badge-primary px-3 py-2 font-weight-bold d-none d-sm-inline-block" style="border-radius: 20px;">
         5 Anggota Terdaftar
     </span>
 </div>
 
-<div class="row mb-4">
+<!-- 5 Member Cards Centered -->
+<div class="d-flex flex-wrap justify-content-center align-items-stretch mb-4" style="gap: 16px;">
     <?php foreach ($members as $idx => $m): ?>
-    <div class="col-12 col-sm-6 col-md-4 col-lg mb-3">
-        <div class="card h-100 border-0 shadow-sm text-center member-card" style="border-radius: 20px; transition: transform 0.25s ease, box-shadow 0.25s ease; border: 1px solid #e0f2fe; background: #ffffff;">
-            <div class="card-body p-3 d-flex flex-column align-items-center justify-content-between">
-                <div>
-                    <!-- Avatar Image with Halo Frame -->
-                    <div class="position-relative mb-3 mt-2" style="width: 105px; height: 105px;">
+    <div class="mb-3" style="flex: 1 1 200px; max-width: 235px; min-width: 195px;">
+        <div class="card h-100 border-0 shadow-sm text-center member-card" style="border-radius: 20px; transition: transform 0.25s ease, box-shadow 0.25s ease; border: 2px solid <?= $m['color'] ?>40; background: #ffffff;">
+            <div class="card-body p-3 d-flex flex-column align-items-center justify-content-between text-center">
+                <div class="w-100 d-flex flex-column align-items-center">
+                    <!-- Avatar Image Centered -->
+                    <div class="position-relative mb-3 mt-2 mx-auto" style="width: 110px; height: 110px;">
                         <img src="<?= base_url('images/team/' . $m['image']) ?>" 
                              alt="<?= esc($m['name']) ?>" 
                              class="rounded-circle shadow" 
-                             style="width: 105px; height: 105px; object-fit: cover; border: 4px solid <?= $m['color'] ?>; padding: 2px; background: #ffffff;">
-                        <span class="position-absolute" style="bottom: -2px; right: 0; background: <?= $m['color'] ?>; color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; border: 2px solid #fff;">
+                             style="width: 110px; height: 110px; object-fit: cover; border: 4px solid <?= $m['color'] ?>; padding: 2px; background: #ffffff; display: block; margin: 0 auto;">
+                        <span class="position-absolute" style="bottom: -2px; right: 2px; background: <?= $m['color'] ?>; color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; border: 2px solid #fff;">
                             <?= $idx + 1 ?>
                         </span>
                     </div>
 
-                    <!-- Member Name & NIM -->
-                    <h5 class="font-weight-bold text-dark mb-1" style="font-size: 1.02rem; min-height: 48px; display: flex; align-items: center; justify-content: center;">
+                    <!-- Member Name & NIM Centered -->
+                    <h5 class="font-weight-bold text-dark mb-1 text-center" style="font-size: 1.02rem; min-height: 48px; display: flex; align-items: center; justify-content: center; width: 100%;">
                         <?= esc($m['name']) ?>
                     </h5>
                     
-                    <div class="mb-2">
+                    <div class="mb-2 text-center w-100">
                         <span class="badge font-weight-bold px-2 py-1" style="background: #e0f2fe; color: #0284c7; border-radius: 8px; font-size: 0.78rem; letter-spacing: 0.5px;">
                             <i class="fas fa-id-card-alt mr-1"></i> <?= esc($m['nim']) ?>
                         </span>
                     </div>
 
                     <!-- Role Badge -->
-                    <div class="mb-2">
+                    <div class="mb-2 text-center w-100">
                         <span class="badge text-white font-weight-600 px-2 py-1" style="background: <?= $m['color'] ?>; border-radius: 6px; font-size: 0.7rem;">
                             <?= esc($m['badge']) ?>
                         </span>
                     </div>
 
                     <!-- Task Scope -->
-                    <p class="text-muted small mb-3 text-left px-1" style="font-size: 0.74rem; line-height: 1.45; background: #f8fafc; border-radius: 10px; padding: 8px;">
+                    <p class="text-muted small mb-3 text-center px-1" style="font-size: 0.74rem; line-height: 1.45; background: #f8fafc; border-radius: 10px; padding: 8px; width: 100%;">
                         <?= esc($m['task']) ?>
                     </p>
                 </div>
 
                 <!-- Avatar Personality Label -->
-                <div class="w-100 pt-2 border-top">
+                <div class="w-100 pt-2 border-top text-center">
                     <span class="text-muted" style="font-size: 0.68rem; font-style: italic;">
                         <i class="fas fa-heart text-danger mr-1"></i> <?= esc($m['avatar']) ?>
                     </span>
@@ -232,6 +233,6 @@
 .member-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 16px 28px rgba(2, 132, 199, 0.16) !important;
-    border-color: #7dd3fc !important;
+    border-color: #0284c7 !important;
 }
 </style>

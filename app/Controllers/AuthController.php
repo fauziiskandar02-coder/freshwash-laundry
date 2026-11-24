@@ -46,6 +46,28 @@ class AuthController extends BaseController
         return redirect()->to(base_url('dashboard'))->with('success', "Selamat datang kembali, {$user['name']}!");
     }
 
+    public function quickLogin()
+    {
+        $role = $this->request->getGet('role') ?? 'admin';
+        $email = ($role === 'kasir') ? 'kasir@umkm.id' : 'admin@umkm.id';
+
+        $userModel = new UserModel();
+        $user = $userModel->where('email', $email)->first();
+
+        if ($user) {
+            session()->set([
+                'is_logged_in' => true,
+                'user_id'      => $user['id'],
+                'user_name'    => $user['name'],
+                'user_email'   => $user['email'],
+                'user_role'    => $user['role'],
+            ]);
+            return redirect()->to(base_url('dashboard'))->with('success', "Selamat datang, {$user['name']}!");
+        }
+
+        return redirect()->to(base_url('login'));
+    }
+
     public function register()
     {
         if (session()->get('is_logged_in')) {

@@ -81,6 +81,16 @@
             transition: all 0.25s ease;
         }
 
+        /* Prevent Chrome Autofill Yellow/Blue Tint */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+            -webkit-text-fill-color: #1e293b !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
         .auth-avatar-mascot {
             width: 82px;
             height: 82px;
@@ -196,19 +206,11 @@
 
                 <!-- Login Glass Card -->
                 <div class="card auth-card-glass p-4 p-md-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
                         <h4 class="font-weight-bold text-dark mb-0" style="font-size: 1.25rem;">
                             <i class="fas fa-soap text-primary mr-1"></i> Masuk Akun Kasir
                         </h4>
                         <span class="badge badge-light border text-primary font-weight-bold px-2 py-1" style="border-radius: 8px;">PORTAL</span>
-                    </div>
-
-                    <!-- Auto-Fill Quick Notice -->
-                    <div class="p-2 mb-3 d-flex align-items-center shadow-sm" style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; color: #0369a1; font-size: 0.8rem;">
-                        <i class="fas fa-bolt text-warning mr-2" style="font-size: 1rem;"></i>
-                        <div>
-                            <b>Akun Siap Pakai:</b> Email &amp; Password otomatis terisi. Tinggal klik tombol <b>Masuk ke Toko Laundry</b>!
-                        </div>
                     </div>
 
                     <?php if (session()->getFlashdata('error')): ?>
@@ -223,16 +225,16 @@
                         </div>
                     <?php endif; ?>
 
-                    <form method="POST" action="<?= base_url('login') ?>">
+                    <form method="POST" action="<?= base_url('login') ?>" autocomplete="off">
                         <?= csrf_field() ?>
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold small text-muted">EMAIL OPERATOR / KASIR</label>
                             <div class="input-group form-floating-clean">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-envelope text-primary"></i></span>
                                 </div>
-                                <input type="email" name="email" id="loginEmail" class="form-control" placeholder="nama@umkm.id" value="admin@umkm.id" required autofocus>
+                                <input type="email" name="email" id="loginEmail" class="form-control" placeholder="nama@umkm.id" value="admin@umkm.id" required autocomplete="off">
                             </div>
                         </div>
 
@@ -240,15 +242,19 @@
                             <label class="font-weight-bold small text-muted">KATA SANDI</label>
                             <div class="input-group form-floating-clean">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-lock text-primary"></i></span>
                                 </div>
-                                <input type="password" name="password" id="loginPassword" class="form-control" placeholder="••••••••" value="admin123" required autocomplete="current-password">
+                                <input type="password" name="password" id="loginPassword" class="form-control" placeholder="••••••••" value="admin123" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <button type="submit" class="btn btn-login-submit btn-block shadow-sm">
                             <i class="fas fa-sign-in-alt mr-2"></i> Masuk ke Toko Laundry
                         </button>
+
+                        <a href="<?= base_url('quick-login?role=admin') ?>" class="btn btn-block font-weight-bold py-2 mt-2 shadow-sm text-decoration-none" style="background: #f0f9ff; border: 1.5px dashed #0284c7; color: #0284c7; border-radius: 14px; font-size: 0.88rem;">
+                            <i class="fas fa-bolt text-warning mr-1"></i> 1-Klik Langsung Masuk (Tanpa Ketik)
+                        </a>
                     </form>
 
                     <!-- Info Kelompok 5 Link Button -->
