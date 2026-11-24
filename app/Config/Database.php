@@ -54,6 +54,34 @@ class Database extends Config
         ],
     ];
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Support clean environment variables without dots (Vercel standard)
+        if ($host = getenv('DB_HOST')) {
+            $this->default['hostname'] = $host;
+        }
+        if ($user = getenv('DB_USER')) {
+            $this->default['username'] = $user;
+        }
+        if ($pass = getenv('DB_PASSWORD')) {
+            $this->default['password'] = $pass;
+        }
+        if ($db = getenv('DB_NAME')) {
+            $this->default['database'] = $db;
+        }
+        if ($port = getenv('DB_PORT')) {
+            $this->default['port'] = (int) $port;
+        }
+        if (getenv('DB_SSL') === 'true' || getenv('DB_SSL') === '1') {
+            $this->default['encrypt'] = [
+                'ssl_verify' => true,
+                'ssl_ca'     => file_exists(__DIR__ . '/../../database/cacert.pem') ? realpath(__DIR__ . '/../../database/cacert.pem') : (file_exists('/etc/ssl/certs/ca-certificates.crt') ? '/etc/ssl/certs/ca-certificates.crt' : null),
+            ];
+        }
+    }
+
     //    /**
     //     * Sample database connection for SQLite3.
     //     *

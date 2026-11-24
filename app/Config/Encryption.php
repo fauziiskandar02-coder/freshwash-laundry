@@ -21,7 +21,16 @@ class Encryption extends BaseConfig
      * You need to ensure it is long enough for the cipher and mode you plan to use.
      * See the user guide for more info.
      */
-    public string $key = '';
+    public string $key = 'hex2bin:e4f71a938b29d91f4b8296a849f12d8a571f2b6e147820a4b7c89f1d2e3b4a56';
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        if ($k = getenv('ENCRYPTION_KEY')) {
+            $this->key = $k;
+        }
+    }
 
     /**
      * --------------------------------------------------------------------------
