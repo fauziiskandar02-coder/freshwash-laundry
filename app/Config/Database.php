@@ -104,6 +104,10 @@ class Database extends Config
                 'ssl_ca'     => $caPath,
             ];
         }
+
+        if (ENVIRONMENT === 'testing') {
+            $this->defaultGroup = 'tests';
+        }
     }
 
     //    /**
@@ -244,16 +248,4 @@ class Database extends Config
             'time'     => 'H:i:s',
         ],
     ];
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        // Ensure that we always set the database group to 'tests' if
-        // we are currently running an automated test suite, so that
-        // we don't overwrite live data on accident.
-        if (ENVIRONMENT === 'testing') {
-            $this->defaultGroup = 'tests';
-        }
-    }
 }
