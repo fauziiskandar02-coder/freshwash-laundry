@@ -37,7 +37,10 @@ class Database extends Config
         'charset'      => 'utf8mb4',
         'DBCollat'     => 'utf8mb4_general_ci',
         'swapPre'      => '',
-        'encrypt'      => (getenv('database.default.encrypt') === 'true' || getenv('DB_SSL') === 'true') ? ['ssl_verify' => true] : false,
+        'encrypt'      => (getenv('database.default.encrypt') === 'true' || getenv('DB_SSL') === 'true') ? [
+            'ssl_verify' => true,
+            'ssl_ca'     => file_exists(__DIR__ . '/../../database/cacert.pem') ? realpath(__DIR__ . '/../../database/cacert.pem') : (file_exists('/etc/ssl/certs/ca-certificates.crt') ? '/etc/ssl/certs/ca-certificates.crt' : null),
+        ] : false,
         'compress'     => false,
         'strictOn'     => false,
         'failover'     => [],
