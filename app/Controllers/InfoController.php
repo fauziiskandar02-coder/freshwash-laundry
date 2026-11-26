@@ -14,7 +14,7 @@ class InfoController extends BaseController
                 'task'    => 'Moderator Presentasi, Dashboard KPI, Three.js 3D Mascot, TiDB Cloud DB & Vercel Serverless Deployment',
                 'image'   => 'fauzi.jpg',
                 'badge'   => 'Lead Developer',
-                'avatar'  => 'Yu Ishigami (Cowo Rambut Hitam)',
+                'avatar'  => 'Yu Ishigami',
                 'color'   => '#0284c7'
             ],
             [
@@ -24,7 +24,7 @@ class InfoController extends BaseController
                 'task'    => 'Master Pelanggan & Member, Master Jasa & Layanan Cuci, Pengaturan Toko & Simulasi Pajak PKP/PPN',
                 'image'   => 'febryan.jpg',
                 'badge'   => 'Master Data Spec.',
-                'avatar'  => 'Miyuki Shirogane (Blonde Spec.)',
+                'avatar'  => 'Miyuki Shirogane',
                 'color'   => '#d97706'
             ],
             [
@@ -34,7 +34,7 @@ class InfoController extends BaseController
                 'task'    => 'Input Nota Cucian POS, Tracking Status Workflow (Antrean -> Selesai), Cetak Struk POS 58mm & 80mm Thermal',
                 'image'   => 'intan.jpg',
                 'badge'   => 'POS & Workflow Spec.',
-                'avatar'  => 'Kaguya Shinomiya (Red Ribbon Spec.)',
+                'avatar'  => 'Kaguya Shinomiya',
                 'color'   => '#e11d48'
             ],
             [
@@ -44,7 +44,7 @@ class InfoController extends BaseController
                 'task'    => 'Penerimaan Kas (Pelunasan Piutang DP), Retur Cuci Ulang Garansi, dan Otomasi Jurnal Double-Entry',
                 'image'   => 'mabel.jpg',
                 'badge'   => 'Accounting Spec.',
-                'avatar'  => 'Miko Iino (Twin-tails Spec.)',
+                'avatar'  => 'Miko Iino',
                 'color'   => '#7c3aed'
             ],
             [
@@ -54,7 +54,7 @@ class InfoController extends BaseController
                 'task'    => 'Laporan Omzet Penjualan (Harian/Bulanan), Kartu Piutang Member, Umur Nota, dan Closing Kas Harian',
                 'image'   => 'jelikha.jpg',
                 'badge'   => 'Reporting Spec.',
-                'avatar'  => 'Chika Fujiwara (Pink Ribbon Spec.)',
+                'avatar'  => 'Chika Fujiwara',
                 'color'   => '#db2777'
             ],
         ];

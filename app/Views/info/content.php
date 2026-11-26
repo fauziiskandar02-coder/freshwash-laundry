@@ -83,8 +83,8 @@
 
                 <!-- Avatar Personality Label -->
                 <div class="w-100 pt-2 border-top text-center">
-                    <span class="text-muted" style="font-size: 0.68rem; font-style: italic;">
-                        <i class="fas fa-heart text-danger mr-1"></i> <?= esc($m['avatar']) ?>
+                    <span class="text-muted" style="font-size: 0.72rem; font-weight: 600;">
+                        <?= esc($m['avatar']) ?>
                     </span>
                 </div>
             </div>
@@ -218,10 +218,10 @@
             </div>
             <div class="col-md-6 mb-3">
                 <div class="d-flex">
-                    <div class="mr-3 text-danger" style="font-size: 1.25rem;"><i class="fas fa-heart"></i></div>
+                    <div class="mr-3 text-primary" style="font-size: 1.25rem;"><i class="fas fa-user-astronaut"></i></div>
                     <div>
                         <h6 class="font-weight-bold text-dark mb-1">Edisi Avatar Khusus &amp; Identitas Tim</h6>
-                        <p class="small text-muted mb-0">Setiap anggota tim dipersonalisasi dengan avatar anime aesthetic Kaguya-sama series beraksen kacamata hati unik sesuai keahlian teknis.</p>
+                        <p class="small text-muted mb-0">Setiap anggota tim dipersonalisasi dengan avatar karakter anime unik sesuai dengan peran teknis masing-masing di kelompok.</p>
                     </div>
                 </div>
             </div>
